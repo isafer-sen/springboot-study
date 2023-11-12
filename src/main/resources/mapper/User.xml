@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <insert id="insert">
+        INSERT INTO user (username, age)
+        VALUES (#{username}, #{age})
+    </insert>
+    <update id="update">
+        UPDATE user
+        SET username=#{username},
+            age=#{age}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM user
+        WHERE id = #{id}
+    </delete>
+    <select id="findAll" resultType="com.example.demo.entity.User">
+        SELECT *
+        FROM user;
+    </select>
+    <select id="show" resultType="com.example.demo.entity.User">
+        SELECT *
+        FROM user
+        WHERE id = #{id};
+    </select>
+</mapper>
