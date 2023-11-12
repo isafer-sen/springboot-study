@@ -39,6 +39,9 @@ public class WebSocket {
         log.info("收到消息{}", message);
     }
 
+    /**
+     * 群发
+     */
     public void sendMessage(String message) {
         for (WebSocket webSocket : WebSocketSet) {
             try {
@@ -49,11 +52,11 @@ public class WebSocket {
         }
     }
 
+
+    /**
+     * 单发
+     */
     public void sendMessageToUser(String message, String userID) {
-        if (message == null || message.isEmpty()) {
-            log.error("消息为空");
-            return;
-        }
         for (WebSocket webSocket : WebSocketSet) {
             if (Objects.equals(webSocket.session.getId(), userID)) {
                 try {

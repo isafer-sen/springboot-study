@@ -15,8 +15,6 @@ public class WebSocketController {
 
     @GetMapping("/ws/{user_id}/{msg}")
     public void wsSend(@PathVariable String user_id, @PathVariable String msg) {
-        System.out.println(user_id);
-        System.out.println(msg);
         webSocket.sendMessageToUser(msg, user_id);
     }
 }
