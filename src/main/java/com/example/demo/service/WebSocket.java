@@ -68,4 +68,11 @@ public class WebSocket {
         }
     }
 
+    /**
+     * 计算有多少个链接
+     */
+    public int countClient() {
+        return WebSocketSet.size();
+    }
+
 }

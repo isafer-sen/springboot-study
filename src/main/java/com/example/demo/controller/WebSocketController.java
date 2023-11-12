@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.helpers.R;
 import com.example.demo.service.WebSocket;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,11 @@ public class WebSocketController {
     private WebSocket webSocket;
 
     @GetMapping("/ws/{user_id}/{msg}")
-    public void wsSend(@PathVariable String user_id, @PathVariable String msg) {
-        webSocket.sendMessageToUser(msg, user_id);
+    public R wsSend(@PathVariable String user_id, @PathVariable String msg) {
+        if (webSocket.countClient() > 0) {
+            webSocket.sendMessageToUser(msg, user_id);
+            return R.success("发送成功");
+        }
+        return R.failed();
     }
 }
