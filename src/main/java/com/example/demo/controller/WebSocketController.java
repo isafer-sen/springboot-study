@@ -14,10 +14,25 @@ public class WebSocketController {
     @Resource
     private WebSocket webSocket;
 
+    /**
+     * 单发
+     */
     @GetMapping("/ws/{user_id}/{msg}")
     public R wsSend(@PathVariable String user_id, @PathVariable String msg) {
         if (webSocket.countClient() > 0) {
             webSocket.sendMessageToUser(msg, user_id);
+            return R.success("发送成功");
+        }
+        return R.failed();
+    }
+
+    /**
+     * 群发
+     */
+    @GetMapping("/ws/{msg}")
+    public R wsSendMany(@PathVariable String msg) {
+        if (webSocket.countClient() > 0) {
+            webSocket.sendMessage(msg);
             return R.success("发送成功");
         }
         return R.failed();
